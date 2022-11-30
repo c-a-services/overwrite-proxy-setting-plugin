@@ -77,8 +77,8 @@ public class OverwriteProxySelector extends ProxySelector {
 			//				16:33:05      at java.net.SocksSocketImpl.connect (SocksSocketImpl.java:384)
 			//				16:33:05      at java.net.Socket.connect (Socket.java:589)
 			//				16:33:05      at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket (PlainConnectionSocketFactory.java:75)
-			LOGGER.debug("assuming isNonProxyHost=false, as socket proxy not supported for {}", aUri);
-			return false;
+			LOGGER.debug("assuming isNonProxyHost=true, as socket proxy not supported for {}", aUri);
+			return true;
 		}
 		String[] tempSplitted = aNonProxyHosts.split("|");
 		String tempExternalForm;
@@ -91,6 +91,7 @@ public class OverwriteProxySelector extends ProxySelector {
 			String tempRegEx = tempString.replaceAll("*", ".*");
 			if (tempExternalForm.matches(tempRegEx)) {
 				LOGGER.debug("Detected nonproxy with tempString={} (tempRegEx={}) for tempExternalForm={}", tempString, tempRegEx, tempExternalForm);
+				return true;
 			}
 		}
 		return false;
