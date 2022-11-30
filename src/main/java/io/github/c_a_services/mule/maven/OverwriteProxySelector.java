@@ -114,7 +114,11 @@ public class OverwriteProxySelector extends ProxySelector {
 	 * 
 	 */
 	public OverwriteProxySelector withPassword(String aProxyPassword) {
-		proxyPassword = aProxyPassword.getBytes();
+		if (aProxyPassword == null) {
+			proxyPassword = null;
+		} else {
+			proxyPassword = aProxyPassword.getBytes();
+		}
 		return this;
 	}
 
