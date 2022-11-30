@@ -1,6 +1,6 @@
 # overwrite-proxy-settings-plugin
 
-Keep your UserProfile\.m2\settings.xml clean without `<proxy>` it can be set dynamically with this plugin.
+Keep your UserProfile/.m2/settings.xml clean without `<proxy>` it can be set dynamically with this plugin.
 
 
 Usage:
@@ -43,7 +43,7 @@ Commandline attribtes needs to be prefixed to the configuration ones with "overw
 -Doverwrite.proxyPassword=yourValue
 ```
 
-nonProxyHosts has same syntax as UserProfile\.m2\settings.xml
+nonProxyHosts has same syntax as UserProfile/.m2/settings.xml
 
 For auto-detection of proxy you may want to look to <https://github.com/volkertb/autoproxy-maven-plugin/>
 
