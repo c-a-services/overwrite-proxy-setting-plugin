@@ -60,8 +60,8 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 	private void showMavenProxySettings(final Log mojoLog) {
 		final org.apache.maven.settings.Proxy manuallyConfiguredActiveMavenProxy = settings.getActiveProxy();
 
+		mojoLog.info("settings.getActiveProxy():");
 		if (manuallyConfiguredActiveMavenProxy != null) {
-			mojoLog.info("settings.getActiveProxy():");
 			mojoLog.info("  * ID      : " + manuallyConfiguredActiveMavenProxy.getId());
 			mojoLog.info("  * Hostname: " + manuallyConfiguredActiveMavenProxy.getHost());
 			mojoLog.info("  * Port    : " + manuallyConfiguredActiveMavenProxy.getPort());
@@ -71,7 +71,7 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 			mojoLog.info("  * ProxySelector: " + ProxySelector.getDefault());
 			mojoLog.info("  * https.proxyHost: " + System.getProperty("https.proxyHost"));
 		} else {
-			mojoLog.info("settings.getActiveProxy(): No currently active proxy found.");
+			mojoLog.info("  * : No currently active proxy found.");
 		}
 	}
 
