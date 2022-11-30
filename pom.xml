@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.c-a-services.mule.maven</groupId>
 	<artifactId>overwrite-proxy-setting-plugin</artifactId>
-	<version>2022.11.1-SNAPSHOT</version>
+	<version>2022.11.1</version>
 	<packaging>maven-plugin</packaging>
 	<name>overwrite-proxy-setting-plugin</name>
 	<description>Sets proxy during build phase or via profile.</description>
@@ -28,7 +28,8 @@
 		<url>https://github.com/c-a-services/overwrite-proxy-setting-plugin</url>
 		<connection>scm:git:git@github.com:c-a-services/overwrite-proxy-setting-plugin.git</connection>
 		<developerConnection>scm:git:git@github.com:c-a-services/overwrite-proxy-setting-plugin.git</developerConnection>
-	</scm>
+	  <tag>2022.11.1</tag>
+  </scm>
 	<properties>
         <slf4jVersion>1.7.30</slf4jVersion>
 	</properties>
