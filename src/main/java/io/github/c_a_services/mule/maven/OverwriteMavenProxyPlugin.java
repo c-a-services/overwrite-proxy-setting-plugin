@@ -70,6 +70,8 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 			mojoLog.info("  * SourceLevel: " + manuallyConfiguredActiveMavenProxy.getSourceLevel());
 			mojoLog.info("  * ProxySelector: " + ProxySelector.getDefault());
 			mojoLog.info("  * https.proxyHost: " + System.getProperty("https.proxyHost"));
+			mojoLog.info("  * https.proxyPort: " + System.getProperty("https.proxyPort"));
+			mojoLog.info("  * http.nonProxyHosts: " + System.getProperty("http.nonProxyHosts"));
 		} else {
 			mojoLog.info("  * : No currently active proxy found.");
 		}
