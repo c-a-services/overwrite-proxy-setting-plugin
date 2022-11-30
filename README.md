@@ -1,6 +1,6 @@
 # overwrite-proxy-settings-plugin
 
-Keep your UserProfile\.m2\settings.xml clean without <proxy> it can be set dynamically with this plugin.
+Keep your UserProfile\.m2\settings.xml clean without `<proxy>` it can be set dynamically with this plugin.
 
 
 Usage:
