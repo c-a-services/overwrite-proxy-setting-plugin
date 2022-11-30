@@ -80,7 +80,7 @@ public class OverwriteProxySelector extends ProxySelector {
 			LOGGER.debug("assuming isNonProxyHost=true, as socket proxy not supported for {}", aUri);
 			return true;
 		}
-		String[] tempSplitted = aNonProxyHosts.split("|");
+		String[] tempSplitted = aNonProxyHosts.split("\\|");
 		String tempExternalForm;
 		try {
 			tempExternalForm = aUri.toURL().toExternalForm();
@@ -88,7 +88,7 @@ public class OverwriteProxySelector extends ProxySelector {
 			throw new IllegalArgumentException("Error with URI=" + aUri, e);
 		}
 		for (String tempString : tempSplitted) {
-			String tempRegEx = tempString.replaceAll("*", ".*");
+			String tempRegEx = tempString.replaceAll("\\*", "\\.\\*");
 			if (tempExternalForm.matches(tempRegEx)) {
 				LOGGER.debug("Detected nonproxy with tempString={} (tempRegEx={}) for tempExternalForm={}", tempString, tempRegEx, tempExternalForm);
 				return true;
