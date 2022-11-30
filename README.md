@@ -11,7 +11,7 @@ Usage:
 			<plugin>
 				<groupId>io.github.c-a-services.mule.maven</groupId>
 				<artifactId>overwrite-proxy-setting-plugin</artifactId>
-				<version>2022.11.1-SNAPSHOT</version>
+				<version>${version.overwrite-proxy-setting-plugin}</version>
 				<executions>
 					<execution>
 						<id>overwrite-proxy</id>
