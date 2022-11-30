@@ -69,6 +69,7 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 			mojoLog.info("  * NonProxy: " + manuallyConfiguredActiveMavenProxy.getNonProxyHosts());
 			mojoLog.info("  * SourceLevel: " + manuallyConfiguredActiveMavenProxy.getSourceLevel());
 			mojoLog.info("  * ProxySelector: " + ProxySelector.getDefault());
+			mojoLog.info("  * https.proxyHost: " + System.getProperty("https.proxyHost"));
 		} else {
 			mojoLog.info("settings.getActiveProxy(): No currently active proxy found.");
 		}
@@ -135,6 +136,18 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 		ProxySelector tempDefaultProxySelector = new OverwriteProxySelector().withHost(proxyHost).withPort(proxyPort).withNonProxyHosts(nonProxyHosts)
 				.withUser(proxyUser).withPassword(proxyPassword);
 		ProxySelector.setDefault(tempDefaultProxySelector);
+
+		// https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html
+		if (proxyHost == null) {
+			System.clearProperty("https.proxyHost");
+			System.clearProperty("https.proxyPort");
+			System.clearProperty("http.nonProxyHosts");
+		} else {
+			System.setProperty("https.proxyHost", proxyHost);
+			System.setProperty("https.proxyPort", "" + proxyPort);
+			System.setProperty("http.nonProxyHosts", nonProxyHosts);
+		}
+
 		aLog.info("Replaced " + ProxySelector.class.getName() + " with own settings.");
 	}
 
