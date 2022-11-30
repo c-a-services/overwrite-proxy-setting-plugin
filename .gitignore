@@ -3,3 +3,5 @@
 /target
 /.settings/
 rebel.xml
+/pom.xml.releaseBackup
+/release.properties
