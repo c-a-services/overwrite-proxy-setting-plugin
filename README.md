@@ -47,5 +47,7 @@ nonProxyHosts has same syntax as UserProfile/.m2/settings.xml
 
 For auto-detection of proxy you may want to look to <https://github.com/volkertb/autoproxy-maven-plugin/>
 
+Fast skip all activities of this plugin via `-Doverwrite-proxy-skip=true`
+
 ---
 This readme is placed here: <https://github.com/c-a-services/overwrite-proxy-setting-plugin>

@@ -45,8 +45,18 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 	@Parameter(property = "overwrite-nonProxyHosts", required = false)
 	private String nonProxyHosts;
 
+	/**
+	 * Fast skip all activities of this plugin via -Doverwrite-proxy-skip=true
+	 */
+	@Parameter(property = "overwrite-proxy-skip", required = false)
+	private boolean skip;
+
 	@Override
 	public void execute() {
+		if (skip) {
+			getLog().info("overwrite-proxy-setting-plugin is skipped");
+			return;
+		}
 		getLog().debug("proxy-overwrite...");
 
 		showMavenProxySettings(getLog());
