@@ -1,5 +1,7 @@
 package io.github.c_a_services.mule.maven;
 
+import java.net.ProxySelector;
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -49,6 +51,7 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 
 		showMavenProxySettings(getLog());
 		overrideMavenProxySettings(getLog());
+		overrideJavaProxySettings(getLog());
 		showMavenProxySettings(getLog());
 
 		getLog().debug("proxy-overwrite finished...");
@@ -65,6 +68,7 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 			mojoLog.info("  * Protocol: " + manuallyConfiguredActiveMavenProxy.getProtocol());
 			mojoLog.info("  * NonProxy: " + manuallyConfiguredActiveMavenProxy.getNonProxyHosts());
 			mojoLog.info("  * SourceLevel: " + manuallyConfiguredActiveMavenProxy.getSourceLevel());
+			mojoLog.info("  * ProxySelector: " + ProxySelector.getDefault());
 		} else {
 			mojoLog.info("settings.getActiveProxy(): No currently active proxy found.");
 		}
@@ -119,4 +123,19 @@ public class OverwriteMavenProxyPlugin extends AbstractMojo {
 		// force maven scanning org.apache.maven.settings.Settings.proxies again.
 		settings.flushActiveProxy();
 	}
+
+	/**
+	 * Overwrite for 
+	 * 12:00:23      at org.apache.http.impl.client.InternalHttpClient.doExecute (InternalHttpClient.java:185)
+	 * 12:00:23      at org.apache.http.impl.client.CloseableHttpClient.execute (CloseableHttpClient.java:83)
+	 * 12:00:23      at org.apache.maven.wagon.shared.http.AbstractHttpClientWagon.execute (AbstractHttpClientWagon.java:1005)
+	 * as well
+	 */
+	private void overrideJavaProxySettings(Log aLog) {
+		ProxySelector tempDefaultProxySelector = new OverwriteProxySelector().withHost(proxyHost).withPort(proxyPort).withNonProxyHosts(nonProxyHosts)
+				.withUser(proxyUser).withPassword(proxyPassword);
+		ProxySelector.setDefault(tempDefaultProxySelector);
+		aLog.info("Replaced " + ProxySelector.class.getName() + " with own settings.");
+	}
+
 }
