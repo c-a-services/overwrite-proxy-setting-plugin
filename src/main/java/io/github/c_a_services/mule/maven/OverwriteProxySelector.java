@@ -70,6 +70,16 @@ public class OverwriteProxySelector extends ProxySelector {
 		if (aNonProxyHosts == null) {
 			return false;
 		}
+		if ("socket".equals(aUri.getScheme())) {
+			//			16:33:05  Caused by: java.lang.IllegalArgumentException: Error with URI=socket://proxy.intdus.retail-sc.com:3128
+			//				16:33:05      at io.github.c_a_services.mule.maven.OverwriteProxySelector.isNonProxyHost (OverwriteProxySelector.java:78)
+			//				16:33:05      at io.github.c_a_services.mule.maven.OverwriteProxySelector.select (OverwriteProxySelector.java:55)
+			//				16:33:05      at java.net.SocksSocketImpl.connect (SocksSocketImpl.java:384)
+			//				16:33:05      at java.net.Socket.connect (Socket.java:589)
+			//				16:33:05      at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket (PlainConnectionSocketFactory.java:75)
+			LOGGER.debug("assuming isNonProxyHost=false, as socket proxy not supported for {}", aUri);
+			return false;
+		}
 		String[] tempSplitted = aNonProxyHosts.split("|");
 		String tempExternalForm;
 		try {
