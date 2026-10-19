@@ -30,9 +30,12 @@ public class OverwriteProxySelector extends ProxySelector {
 
 	private String nonProxyHosts;
 
+	private String protocol = "https";
+
 	public OverwriteProxySelector() {
 		super();
 		LOGGER.debug("Created {}", this);
+		ProxySelector.setDefault(this);
 	}
 
 	/**
@@ -144,9 +147,17 @@ public class OverwriteProxySelector extends ProxySelector {
 	/**
 	 * 
 	 */
+	public OverwriteProxySelector withProtocol(String protocol) {
+		this.protocol = protocol;
+		return this;
+	}
+
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
-		return "OverwriteProxySelector [proxyHost=" + proxyHost + ", proxyPort=" + proxyPort + ", proxyUser=" + proxyUser + ", nonProxyHosts=" + nonProxyHosts
+		return "OverwriteProxySelector [protocol=" + protocol +", proxyHost=" + proxyHost + ", proxyPort=" + proxyPort + ", proxyUser=" + proxyUser + ", nonProxyHosts=" + nonProxyHosts
 				+ "]";
 	}
 
